@@ -1,3 +1,4 @@
+import { API_RESERVATIONS } from "../config/api";
 import type { ReservaResponse } from "../interfaces/ReservaResponse";
 
 export interface CrearReservaPayload {
@@ -9,7 +10,7 @@ export interface CrearReservaPayload {
 }
 
 export async function crearReserva(payload: CrearReservaPayload): Promise<ReservaResponse> {
-  const res = await fetch("http://localhost:8086/api/reservas/crear", {
+  const res = await fetch(`${API_RESERVATIONS}/crear`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -26,17 +27,17 @@ export async function crearReserva(payload: CrearReservaPayload): Promise<Reserv
 
 
 export async function getReservasByUsuario(idUsuario: number) {
-  const res = await fetch(`http://localhost:8086/api/reservas/usuario/detalle/${idUsuario}`);
+  const res = await fetch(`${API_RESERVATIONS}/usuario/detalle/${idUsuario}`);
 
   if (!res.ok) {
     throw new Error("Error al cargar reservas del usuario");
   }
 
-  return res.json(); // lista de reservas
+  return res.json();
 }
 
 export async function cancelarReserva(idReserva: number) {
-  const res = await fetch(`http://localhost:8086/api/reservas/${idReserva}`, {
+  const res = await fetch(`${API_RESERVATIONS}/${idReserva}`, {
     method: "DELETE"
   });
 
@@ -46,11 +47,10 @@ export async function cancelarReserva(idReserva: number) {
 }
 
 export async function getReservaById(idReserva: number) {
-  const res = await fetch(`http://localhost:8086/api/reservas/${idReserva}`, {
+  const res = await fetch(`${API_RESERVATIONS}/${idReserva}`, {
     method: "GET"
   }); 
   
-
   if (!res.ok) throw new Error("Reserva no encontrada");
 
   return res.json();
@@ -58,7 +58,7 @@ export async function getReservaById(idReserva: number) {
 
 
 export async function getReservaDetalleById(idReserva: number) {
-  const res = await fetch(`http://localhost:8086/api/reservas/detalle/${idReserva}`,{
+  const res = await fetch(`${API_RESERVATIONS}/detalle/${idReserva}`,{
     method: "GET"
   });
 
@@ -66,11 +66,3 @@ export async function getReservaDetalleById(idReserva: number) {
 
   return res.json();
 }
-
-
-
-
-
-
-
-

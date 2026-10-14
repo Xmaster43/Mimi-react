@@ -1,5 +1,7 @@
+import { API_AUTH } from "../config/api";
+
 export async function login(email: string, password: string) {
-  const res = await fetch("http://localhost:8085/api/auth/login", {
+  const res = await fetch(`${API_AUTH}/login`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password }),
@@ -11,16 +13,13 @@ export async function login(email: string, password: string) {
 
   const data = await res.json();
 
-  return data; // { success, message, user, token }
+  return data;
 }
 
-
-
-// --- 2) PERFIL DEL USUARIO (ME) ---
 export async function getUserProfile() {
   const token = localStorage.getItem("token");
 
-  const res = await fetch("http://localhost:8085/api/auth/me", {
+  const res = await fetch(`${API_AUTH}/me`, {
     method: "GET",
     headers: {
       "Authorization": `Bearer ${token}`,
@@ -30,7 +29,6 @@ export async function getUserProfile() {
   return res.json();
 }
 
-
 export async function registerUser(payload: {
   nombre: string;
   apellido: string;
@@ -38,7 +36,7 @@ export async function registerUser(payload: {
   password: string;
   rolId: number;
 }) {
-  const res = await fetch("http://localhost:8085/api/auth/register", {
+  const res = await fetch(`${API_AUTH}/register`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),

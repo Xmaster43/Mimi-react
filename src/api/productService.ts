@@ -4,13 +4,13 @@ import type { Product } from "../interfaces/Product";
 
 // GET all products
 export const getProducts = async (): Promise<Product[]> => {
-  const res = await api.get(`${API_PRODUCTS}/products`);
+  const res = await api.get(`${API_PRODUCTS}`);
   return res.data;
 };
 
 // GET product by ID
 export const getProductById = async (id: number): Promise<Product> => {
-  const res = await api.get(`${API_PRODUCTS}/products/${id}`);
+  const res = await api.get(`${API_PRODUCTS}/${id}`);
   return res.data;
 };
 
@@ -22,7 +22,7 @@ export const createProduct = async (payload: {
   imagen: string;
   categoriaId: number;
 }): Promise<Product> => {
-  const res = await api.post(`${API_PRODUCTS}/products`, payload);
+  const res = await api.post(`${API_PRODUCTS}`, payload);
   return res.data;
 };
 
@@ -31,11 +31,11 @@ export const updateProduct = async (
   id: number,
   payload: Partial<Product>
 ): Promise<Product> => {
-  const res = await api.put(`${API_PRODUCTS}/products/${id}`, payload);
+  const res = await api.put(`${API_PRODUCTS}/${id}`, payload);
   return res.data;
 };
 
 // DELETE product
 export const deleteProduct = async (id: number) => {
-  return api.delete(`${API_PRODUCTS}/products/${id}`);
+  return api.delete(`${API_PRODUCTS}/${id}`);
 };
