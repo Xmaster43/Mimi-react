@@ -6,6 +6,7 @@ import type { Product } from "../interfaces/Product";
 export default function Tienda() {
   const [query, setQuery] = useState("");
   const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -14,6 +15,8 @@ export default function Tienda() {
         setProducts(data);
       } catch (error) {
         console.error("Error cargando productos:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -26,6 +29,11 @@ export default function Tienda() {
       p.nombre.toLowerCase().includes(query.toLowerCase())
     );
   }, [query, products]);
+
+  // LOADING: mientras llegan los productos desde el microservicio
+  if (loading) {
+    return <h3 className="text-center mt-5">Cargando productos...</h3>;
+  }
 
   return (
     <div className="home-fondo">

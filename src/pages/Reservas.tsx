@@ -32,6 +32,10 @@ export default function Reserva() {
   const [mensaje, setMensaje] = useState<string>("");
   const [error, setError] = useState<string>("");
 
+  // LOADING: esperar servicios y trabajadores antes de mostrar el formulario
+  const [cargandoServicios, setCargandoServicios] = useState(true);
+  const [cargandoTrabajadores, setCargandoTrabajadores] = useState(true);
+
   // USUARIO DESDE LOCALSTORAGE
   const usuario = JSON.parse(localStorage.getItem("user") || "null");
   const usuarioId = usuario?.idUser ?? null;
@@ -52,6 +56,8 @@ export default function Reserva() {
       } catch (err) {
         console.error("Error cargando servicios:", err);
         setError("Error al cargar los servicios");
+      } finally {
+        setCargandoServicios(false);
       }
     };
 
@@ -69,6 +75,8 @@ export default function Reserva() {
       } catch (err) {
         console.error("Error cargando trabajadores:", err);
         setError("Error al cargar trabajadores");
+      } finally {
+        setCargandoTrabajadores(false);
       }
     };
     fetchTrabajadores();
@@ -159,6 +167,10 @@ export default function Reserva() {
   // ======================================================
   // FORMULARIO
   // ======================================================
+  if (cargandoServicios || cargandoTrabajadores) {
+    return <h3 className="text-center mt-5">Cargando formulario de reserva...</h3>;
+  }
+
   return (
     <div className="home-fondo">
       <div className="container cajita-fondo">
