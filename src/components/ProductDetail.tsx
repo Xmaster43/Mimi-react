@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import type { Product } from "../interfaces/Product";
 import { CLP } from "../utils/currency";
 import { useCart } from "../hooks/useCart";
+import { imageUrl } from "../config/api";
 
 export default function ProductDetail({ product }: { product: Product }) {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ export default function ProductDetail({ product }: { product: Product }) {
       <div className="row mt-4">
         <div className="col-md-6">
           <img
-            src={`http://localhost:8087/${product.imagen}`}
+            src={imageUrl(product.imagen)}
             alt={product.nombre}
             className="img-fluid rounded shadow-sm"
             onError={(e) => (e.currentTarget.src = "/fallback.webp")}

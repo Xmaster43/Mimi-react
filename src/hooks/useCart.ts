@@ -1,6 +1,7 @@
 import { useCallback, useMemo } from "react";
 import { useLocalStorage } from "./useLocalStorage";
 import type { Product } from "../interfaces/Product";
+import { imageUrl } from "../config/api";
 
 export type CartItem = {
   id: number;
@@ -28,7 +29,7 @@ export function useCart() {
             id: p.idProduct,
             name: p.nombre,
             price: p.precio,
-            image: `http://localhost:8087/${p.imagen}`,
+            image: imageUrl(p.imagen),
             qty: 1,
           });
         }

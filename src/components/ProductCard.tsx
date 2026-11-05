@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import type { Product } from "../interfaces/Product";
 import { CLP } from "../utils/currency";
 import { useCart } from "../hooks/useCart";
+import { imageUrl } from "../config/api";
 
 type Props = { product: Product };
 
@@ -18,7 +19,7 @@ export default function ProductCard({ product }: Props) {
     <div className="col-12 col-md-6 col-xl-4">
       <div className="card h-100">
         <img
-          src={`http://localhost:8087/${product.imagen}`}
+          src={imageUrl(product.imagen)}
           className="card-img-top fit contain"
           alt={product.nombre}
           onError={(e) => (e.currentTarget.src = "/fallback.webp")}

@@ -2,6 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getProductById } from "../api/productService";
 import type { Product } from "../interfaces/Product";
+import { imageUrl } from "../config/api"
 
 export default function ProductoDetalle() {
   const { id } = useParams();
@@ -50,7 +51,7 @@ export default function ProductoDetalle() {
 
             <div className="col-md-6 mb-4 mb-md-0">
               <img
-                src={`http://localhost:8087/${product.imagen}`}
+                src={imageUrl(product.imagen)}
                 alt={product.nombre}
                 className="img-fluid rounded shadow-sm"
                 style={{

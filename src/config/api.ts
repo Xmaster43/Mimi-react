@@ -11,6 +11,8 @@
 const baseUrl = import.meta.env.VITE_API_BASE_URL?.replace(/\/$/, '');
 const useGateway = !!baseUrl;
 
+
+
 function buildServiceUrl(
   serviceKey: string,
   gatewayPath: string,
@@ -62,3 +64,9 @@ export const API_RESERVATIONS = buildServiceUrl(
 
 export const isUsingGateway = (): boolean => useGateway;
 export const getBaseUrl = (): string | undefined => baseUrl;
+
+export const IMAGES_BASE_URL = (
+  import.meta.env.VITE_IMAGES_BASE_URL ?? 'http://localhost:8087'
+).replace(/\/$/, '');
+
+export const imageUrl = (path: string): string => `${IMAGES_BASE_URL}/${path}`;
